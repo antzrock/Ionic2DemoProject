@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>{{mode == 1 ? 'Add Project':'Edit Project'}}</ion-title>
+	<ion-buttons start>
+	  <button fab warning round (click)="close()"><ion-icon name="arrow-round-back"></ion-icon></button>
+	</ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [ngFormModel]="projectForm">
+	<ion-list>
+	  <ion-item>
+	    <ion-label floating>Name</ion-label>
+		<ion-input disabled={{titleDisabled}} #title (change)="elementChanged(title)" ngControl="title" type="text"></ion-input>
+	  </ion-item>
+	  <ion-item no-lines *ngIf="!projectForm.controls.title.valid  && (titleChanged || submitAttempt)">
+	    <p *ngIf="projectForm.controls.title.hasError('required')" style="color: #ea6153;">Project name is required!</p>
+		<p *ngIf="projectForm.controls.title.hasError('projectnameexists')" style="color: #ea6153;">Sorry, project name already taken!</p>
+	  </ion-item>
+	  <ion-item>
+	    <ion-label floating>Description</ion-label>
+		<ion-input #description ngControl="description" type="text"></ion-input>
+	  </ion-item>
+	</ion-list>
+	<button full (click)="save()">Save</button>
+  </form>
+	
+</ion-content>`
